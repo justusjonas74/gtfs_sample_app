@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="col-md-9">
+		<h1>VGN Stops</h1>
+	</div>
+	<div class="col-md-3">
+		<%= form_tag(stops_path, method: :get, class: 'form-inline', id: 'search-form') do %>
+			<div class="input-group">
+			<div class="input-group-addon"><i class="fa fa-search fa-fw" aria-hidden="true"></i></div>
+		 	 <%=search_field_tag :term, params[:term], class: 'form-control' %>
+		 	 </div>
+		  <%#= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
+		<% end %>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<table class="table table-small">
+	    <thead>
+	        <tr>
+	            <th>Name</th>
+	            <th>ID</th>
+	            <th>parent_station</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <% @stops.each do |st| %>
+	            <tr>
+	                <td><%= link_to st.stop_name, stop_path(st.id) %></td>
+	                <td><%= st.stop_id %></td>
+	                <td><%= st.parent_station %></td>
+	            </tr>
+	        <% end %>
+	    </tbody>
+	</table>
+
+	<%= will_paginate @posts %>
+</div>

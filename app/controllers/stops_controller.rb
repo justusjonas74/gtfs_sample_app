@@ -1,0 +1,45 @@
+class StopsController < ApplicationController
+    def index
+        @stops = Stop.search(params[:term]).paginate(:page => params[:page], :per_page => 30)
+    end
+
+    def show
+      @stops = Stop.get_with_childs(params[:id])
+      arr = @stops.map(&:id)
+      @stop_times = Trip
+        .eager_load(:stop_times, calendar: [:calendar_dates])
+        .order('stop_times.departure_time')
+        .where('stop_times.stop_id IN (?)', arr).where('calendars.? = 1', Time.now.strftime("%A").downcase)
+        .where('stop_times.departure_time > DATETIME(?)', Time.now.strftime("%T"))
+
+        binding.pry
+    end
+
+    def find_stop
+      @stop = Stop.where('stop_name LIKE ?', params[:term])
+      if @stop.one?
+        redirect_to stop_path(@stop.take.id)
+      else
+        redirect_to stops_path(:term => params[:term])
+      end
+    end
+
+
+    def stops_list
+      #if params[:term] && params[:term].length > 1
+      if params[:term]
+        @stops = Stop.search(params[:term]).limit(20)
+      else
+        @stops = Stop.none
+      end
+      render json: @stops.map(&:stop_name)
+  end
+
+    def search
+
+    end
+
+    def stop_params
+      params.require(:stop).permit(:term)
+    end
+end
