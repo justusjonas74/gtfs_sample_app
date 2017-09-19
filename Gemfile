@@ -60,5 +60,6 @@ gem "activerecord-import"
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'will_paginate', '~> 3.1.0'
-gem "font-awesome-rails"
+#gem "font-awesome-rails"
+gem 'material_icons'
 gem 'jquery-ui-rails'

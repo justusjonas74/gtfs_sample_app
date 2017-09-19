@@ -5,141 +5,89 @@ namespace :gtfs do
       source = GTFS::Source.build(args.file_name)
       #binding.pry
       puts "Source Loaded."
-      #puts source.agencies.first.name
+     
+   
 
-    # i = 0
-    # source.each_shape do |sh|
-    #   binding.pry
-    #   #Shape.create(sh.to_hash)
-    #   puts "Import Shape Number #{i} \r"
-    # end
-    # puts "#{i} items from Shapes.txt added."# i = 0
+    # import_gtfs_source(source, :agency, {
+    #   :agency_id => :id,
+    #   :agency_name => :name,
+    #   :agency_url => :url,
+    #   :agency_timezone => :timezone,
+    #   :agency_lang => :lang,
+    #   :agency_phone => :phone,
+    #   :agency_fare_url => :fare_url,
+    #   #:agency_email => :email BUG: Attribute not available in 'gtfs' gem
+    # })
 
+    # import_gtfs_source(source, :stop, {
+    #   :stop_id => :id,
+    #   :stop_code => :code,
+    #   :stop_name => :name,
+    #   :stop_desc => :desc,
+    #   :stop_lat => :lat,
+    #   :stop_lon => :lon,
+    #   :stop_url => :url,
+    #   :location_type => :location_type,
+    #   :parent_station => :parent_station,
+    #   :stop_timezone => :timezone,
+    #   :wheelchair_boarding => :wheelchair_boarding,
+    #   :zone_id => :zone_id
+    # })
 
-    # i = 0
-    # source.each_fare_attribute do |fa|
-    #   binding.pry
-    #   #FareAttribute.create(fa.to_hash)
-    #   puts "Import Fare Attribute Number #{i} \r"
-    # end
-    # puts "#{i} items from Fare_attributes.txt added."
+    # import_gtfs_source(source, :route, {
+    #   :route_id => :id,
+    #   :route_short_name => :short_name,
+    #   :route_long_name => :long_name,
+    #   :route_desc => :desc,
+    #   :route_type => :type,
+    #   :route_url => :url,
+    #   :route_color => :color,
+    #   :route_text_color => :text_color
+    # }, {
+    #   :agency_id => :agency_id
+    # })
 
-    # i = 0
-    # source.each_fare_rule do |fr|
-    #   binding.pry
-    #   #FareRule.create(fr.to_hash)
-    #   puts "Import Fare Rule Number #{i} \r"
-    # end
-    # puts "#{i} items from Fare_rules.txt added."
+    # import_gtfs_source(source, :calendar,{
+    #   :calendar_id => :service_id,
+    #   :monday => nil,
+    #   :tuesday => nil,
+    #   :wednesday => nil,
+    #   :thursday => nil,
+    #   :friday => nil,
+    #   :saturday => nil,
+    #   :sunday => nil,
+    #   :start_date => nil,
+    #   :end_date => nil
+    # })
 
-    # i = 0
-    # source.each_feed_info do |fi|
-    #   binding.pry
-    #   #FeedInfo.create(fi.to_hash)
-    #   puts "Import Feed Info Number #{i} \r"
-    # end
-    # puts "#{i} items from FeedInfo.txt added."
+    # import_gtfs_source(source, :calendar_date, {
+    #   #:service_id_ref => :service_id,
+    #   :date => nil,
+    #   :exception_type => nil
+    # },{
+    #   :calendar_id => :calendar_id
+    # })
 
+    # import_gtfs_source(source, :trip, {
+    #   :trip_id => :id,
+    #   :trip_headsign => :headsign,
+    #   :trip_short_name => :short_name,
+    #   :block_id => :block_id,
+    #   :shape_id => :shape_id,
+    #   :direction_id => :direction_id,
+    #   :wheelchair_accessible => :wheelchair_accessible
+    #   #:bikes_allowed #:BUG!
+    # }, {
+    #   :route_id => :route_id,
+    #   :calendar_id => :calendar_id,
+    # })
 
-    # BUG: PRODUCES ERROR IF FILE NOT EXIST
-    # TODO: NOT TESTED
-
-    # i = 0
-    # frequencies = []
-    # binding.pry
-    # source.try(:each_frequency) do |f|
-    #   binding.pry
-    #   frequencies << Frequency.new(f.to_hash)
-    #   i += 1
-    #   print "Import Frequency Number #{i} \r"
-    #   $stdout.flush
-    # end
-    # puts "#{i} items from frequencies.txt added to memory."
-    # Frequency.import frequencies
-    # puts "#{i} items from frequencies.txt added to Database."
-
-    #####################
-
-    import_gtfs_source(source, :agency, {
-      :agency_id => :id,
-      :agency_name => :name,
-      :agency_url => :url,
-      :agency_timezone => :timezone,
-      :agency_lang => :lang,
-      :agency_phone => :phone,
-      :agency_fare_url => :fare_url,
-      #:agency_email => :email BUG: Attribute not available in 'gtfs' gem
-    })
-
-    import_gtfs_source(source, :stop, {
-      :stop_id => :id,
-      :stop_code => :code,
-      :stop_name => :name,
-      :stop_desc => :desc,
-      :stop_lat => :lat,
-      :stop_lon => :lon,
-      :stop_url => :url,
-      :location_type => :location_type,
-      :parent_station => :parent_station,
-      :stop_timezone => :timezone,
-      :wheelchair_boarding => :wheelchair_boarding,
-      :zone_id => :zone_id
-    })
-
-    import_gtfs_source(source, :route, {
-      :route_id => :id,
-      :route_short_name => :short_name,
-      :route_long_name => :long_name,
-      :route_desc => :desc,
-      :route_type => :type,
-      :route_url => :url,
-      :route_color => :color,
-      :route_text_color => :text_color
-    }, {
-      :agency_id => :agency_id
-    })
-
-    import_gtfs_source(source, :calendar,{
-      :calendar_id => :service_id,
-      :monday => nil,
-      :tuesday => nil,
-      :wednesday => nil,
-      :thursday => nil,
-      :friday => nil,
-      :saturday => nil,
-      :sunday => nil,
-      :start_date => nil,
-      :end_date => nil
-    })
-
-    import_gtfs_source(source, :calendar_date, {
-      #:service_id_ref => :service_id,
-      :date => nil,
-      :exception_type => nil
-    },{
-      :calendar_id => :calendar_id
-    })
-
-    import_gtfs_source(source, :trip, {
-      :trip_id => :id,
-      :trip_headsign => :headsign,
-      :trip_short_name => :short_name,
-      :block_id => :block_id,
-      :shape_id => :shape_id,
-      :direction_id => :direction_id,
-      :wheelchair_accessible => :wheelchair_accessible
-      #:bikes_allowed #:BUG!
-    }, {
-      :route_id => :route_id,
-      :calendar_id => :calendar_id,
-    })
-
-    import_gtfs_source(source, :transfer, {
-      :from_stop_id => :from_stop_id,
-      :to_stop_id => :to_stop_id,
-      :min_transfer_time => :min_transfer_time,
-      :transfer_type => :type
-    })
+    # import_gtfs_source(source, :transfer, {
+    #   :from_stop_id => :from_stop_id,
+    #   :to_stop_id => :to_stop_id,
+    #   :min_transfer_time => :min_transfer_time,
+    #   :transfer_type => :type
+    # })
 
     import_gtfs_source(source, :stop_time, {
         :arrival_time => nil,
