@@ -175,11 +175,6 @@ class CreateTableGtfs < ActiveRecord::Migration[5.1]
         # accommodated.
         t.integer :bikes_allowed  #0 for no information, 1 for at least
         # one bicycle accommodated, 2 for no bicycles accommodated
-        t.index :route_id
-        t.index :calendar_id
-        t.index :direction_id
-        t.index :block_id
-        t.index :shape_id
      end
   end
 end

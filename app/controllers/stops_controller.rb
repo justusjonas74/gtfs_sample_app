@@ -6,13 +6,19 @@ class StopsController < ApplicationController
     def show
       @stops = Stop.get_with_childs(params[:id])
       arr = @stops.map(&:id)
-      @stop_times = Trip
-        .eager_load(:stop_times, calendar: [:calendar_dates])
-        .order('stop_times.departure_time')
-        .where('stop_times.stop_id IN (?)', arr).where('calendars.? = 1', Time.now.strftime("%A").downcase)
-        .where('stop_times.departure_time > DATETIME(?)', Time.now.strftime("%T"))
+      col = Calendar.connection.quote_column_name(Time.now.strftime("%A").downcase)
 
-        binding.pry
+      searchblock = "calendars.#{col} = 1"
+      @stop_times = Trip
+        .includes(:stop_times, calendar: [:calendar_dates])
+        .order('stop_times.departure_time')
+        .where('stop_times.stop_id IN (?)', arr)
+        .where("(calendar_dates.date = ? AND calendar_dates.exception_type = 1) OR (#{searchblock})", Time.now)
+        .where('NOT EXISTS ( SELECT 1 FROM calendar_dates WHERE (calendars.id = calendar_dates.calendar_id) AND (calendar_dates.date = ? AND calendar_dates.exception_type = 2))', Time.now)
+        .where('stop_times.departure_time > ?', Time.now.strftime("%T"))
+        .where('calendars.start_date < ?', Time.now)
+        .where('calendars.end_date > ?', Time.now)
+        .limit(20)
     end
 
     def find_stop
