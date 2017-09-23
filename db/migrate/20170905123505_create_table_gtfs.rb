@@ -131,9 +131,9 @@ class CreateTableGtfs < ActiveRecord::Migration[5.1]
         # t.string :transit_system , :null => false
          #t.string :trip_id_ref, :null => false
          t.references :trip, :null => false
-         t.time :arrival_time
+         t.interval :arrival_time
          #arrival_time_seconds INT(100)
-         t.time :departure_time#, #:null => false
+         t.interval :departure_time#, #:null => false
          #departure_time_seconds INT(100)
          #t.string :stop_id_ref, :null => false
          t.references :stop, :null => false
@@ -162,8 +162,8 @@ class CreateTableGtfs < ActiveRecord::Migration[5.1]
 
     create_table :trips do |t|
         #t.string :transit_system, :null => false
-        t.string :route_id, :null => false
-        t.string :calendar_id, :null => false
+        t.references :route, :null => false
+        t.references :calendar, :null => false
         t.string :trip_id, :null => false
         t.string :trip_headsign
         t.string :trip_short_name

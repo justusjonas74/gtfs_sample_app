@@ -1,24 +1,15 @@
 class StopsController < ApplicationController
+    helper StopsHelper
+
     def index
         @stops = Stop.search(params[:term]).paginate(:page => params[:page], :per_page => 30)
     end
 
     def show
+
       @stops = Stop.get_with_childs(params[:id])
       arr = @stops.map(&:id)
-      col = Calendar.connection.quote_column_name(Time.now.strftime("%A").downcase)
-
-      searchblock = "calendars.#{col} = 1"
-      @stop_times = Trip
-        .includes(:stop_times, calendar: [:calendar_dates])
-        .order('stop_times.departure_time')
-        .where('stop_times.stop_id IN (?)', arr)
-        .where("(calendar_dates.date = ? AND calendar_dates.exception_type = 1) OR (#{searchblock})", Time.now)
-        .where('NOT EXISTS ( SELECT 1 FROM calendar_dates WHERE (calendars.id = calendar_dates.calendar_id) AND (calendar_dates.date = ? AND calendar_dates.exception_type = 2))', Time.now)
-        .where('stop_times.departure_time > ?', Time.now.strftime("%T"))
-        .where('calendars.start_date < ?', Time.now)
-        .where('calendars.end_date > ?', Time.now)
-        .limit(20)
+      @stop_times = Trip.next_trips(arr)
     end
 
     def find_stop

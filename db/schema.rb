@@ -108,8 +108,8 @@ ActiveRecord::Schema.define(version: 20170905123505) do
 
   create_table "stop_times", force: :cascade do |t|
     t.bigint "trip_id", null: false
-    t.time "arrival_time"
-    t.time "departure_time"
+    t.interval "arrival_time"
+    t.interval "departure_time"
     t.bigint "stop_id", null: false
     t.integer "stop_sequence", null: false
     t.string "stop_headsign"
@@ -149,8 +149,8 @@ ActiveRecord::Schema.define(version: 20170905123505) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.string "route_id", null: false
-    t.string "calendar_id", null: false
+    t.bigint "route_id", null: false
+    t.bigint "calendar_id", null: false
     t.string "trip_id", null: false
     t.string "trip_headsign"
     t.string "trip_short_name"
@@ -159,11 +159,8 @@ ActiveRecord::Schema.define(version: 20170905123505) do
     t.string "shape_id"
     t.integer "wheelchair_accessible"
     t.integer "bikes_allowed"
-    t.index ["block_id"], name: "index_trips_on_block_id"
     t.index ["calendar_id"], name: "index_trips_on_calendar_id"
-    t.index ["direction_id"], name: "index_trips_on_direction_id"
     t.index ["route_id"], name: "index_trips_on_route_id"
-    t.index ["shape_id"], name: "index_trips_on_shape_id"
   end
 
 end

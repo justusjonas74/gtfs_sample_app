@@ -1,4 +1,5 @@
 class Route < ApplicationRecord
-    belongs_to :agency, optional: true
     has_many :trips
+    belongs_to :agency, optional: true
+
 end
