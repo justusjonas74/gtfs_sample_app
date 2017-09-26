@@ -11,7 +11,7 @@ default: &default
 
 development: 
   <<: *default
-  database: dbname
+  database: just
   host: localhost
 
 
