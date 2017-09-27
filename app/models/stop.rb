@@ -2,15 +2,7 @@ class Stop < ApplicationRecord
   has_many :stop_times
 
   scope :no_childs, -> { where(parent_station: "") }
-
-  def self.next_departures(id)
-
-    # find all related childs and parrents
-
-    # select all VALID stop_times for given DateTime
-
-  end
-
+  scope :center_pos, -> {[average(:stop_lat), average(:stop_lon)]}
 
   def self.search(term)
     if term

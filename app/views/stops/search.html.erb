@@ -1,3 +1,14 @@
+<% content_for :outside do %>
+	<div id="mapLocation"></div>
+<% end %>
+
+<% content_for :script do %>
+<script type="text/javascript">
+	$( document ).ready(function() {
+		loadMaps(<%= @center[0].to_f %>, <%= @center[1].to_f %>, 10);
+	});
+</script>
+<% end %>
 <div class="col-md-6">
 	<div class="centered">
 		<%= form_tag(find_stop_path, method: :post, class: 'form-inline', id: 'search-form') do %>

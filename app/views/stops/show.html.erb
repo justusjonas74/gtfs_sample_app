@@ -1,14 +1,27 @@
-<div class="row justify-content-center">
-	<div class="col-md-6">
+<% content_for :outside do %>
+	<div id="mapLocation"></div>
+<% end %>
+
+<% content_for :script do %>
+<script type="text/javascript">
+	$( document ).ready(function() {
+		loadMaps(<%= @stops[0].stop_lat.to_f %>, <%= @stops[0].stop_lon.to_f %>, 15);
+		map.addMarker({
+			lat: <%= @stops[0].stop_lat.to_f %>,
+			lng: <%= @stops[0].stop_lon.to_f %> 
+			});
+	});
+</script>
+<% end %>
+
+<div class="row">
+	<div class="col-md-4">
 		<h1><%= @stops[0].stop_name %></h1>
 		<table class="table table-striped table-sm table-striped table-responsive">
 			<thead>
 				<tr>
-					<th colspan="2">Richtung</th>
-					<th> Abfahrt </th>
-				
-					
-
+					<th colspan="2">Direction</th>
+					<th> Departure </th>
 				</tr>
 			</thead>
 			<tbody>

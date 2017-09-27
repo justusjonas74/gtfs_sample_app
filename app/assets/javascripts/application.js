@@ -14,6 +14,7 @@
 //= require turbolinks
 //= require jquery3
 //= require jquery-ui/widgets/autocomplete
-//= require jquery_ujs
+// require jquery_ujs
+//= require gmaps
 //= require popper
 //= require_tree .

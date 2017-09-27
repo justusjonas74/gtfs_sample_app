@@ -10,9 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *= require material_icons
+ *= require jquery-ui/menu
+ *= require jquery-ui/autocomplete
  *= require_self
  *= require_tree
- *= require jquery-ui
+ 
  
  *
  */
@@ -21,19 +23,19 @@
 @import "bootstrap";
 //@import "font-awesome";
 
-body {
+/*body {
 	background: asset-data-url("bg_bus.jpg") no-repeat center center fixed; 
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
 	  -o-background-size: cover;
 	  background-size: cover;
-}
+}*/
 
 body div.container{
 	margin-top: 25px;
 }
 table.table {
-	background: rgba(255,255,255,0.5)
+	background: rgba(255,255,255,0.9)
 }
 
 .centered {

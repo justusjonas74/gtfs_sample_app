@@ -1,5 +1,6 @@
 class StopsController < ApplicationController
     helper StopsHelper
+      before_action :get_center_stop, only: [:search, :index]
 
     def index
         @stops = Stop.search(params[:term]).paginate(:page => params[:page], :per_page => 30)
@@ -34,9 +35,16 @@ class StopsController < ApplicationController
 
     def search
 
+
     end
 
     def stop_params
       params.require(:stop).permit(:term)
+    end
+
+    private
+
+    def get_center_stop
+       @center = Stop.center_pos
     end
 end
