@@ -4,9 +4,9 @@
 
 <% content_for :script do %>
 <script type="text/javascript">
-	$( document ).ready(function() {
+	function initMaps(){
 		loadMaps(<%= @center[0].to_f %>, <%= @center[1].to_f %>, 10);
-	});
+	};
 </script>
 <% end %>
 <div class="col-md-6">

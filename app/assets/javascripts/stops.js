@@ -185,6 +185,10 @@ var styles = [
     }
 ];
 
+function mapsCenterPos(){
+	return window.innerWidth * 0.25 
+};
+
 function loadMaps(lat, lng, zoom) {
 	map = new GMaps({
 	  div: '#mapLocation',

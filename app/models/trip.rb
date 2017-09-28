@@ -3,7 +3,7 @@ class Trip < ApplicationRecord
     belongs_to :route
     has_many :stop_times
 
-    def self.next_trips(arr, time = Time.now, number = 20)
+    def self.next_trips(arr, time = Time.current, number = 20)
         col = Calendar.connection.quote_column_name(Time.now.strftime("%A").downcase)
         searchblock = "calendars.#{col} = 1"
         includes(:route, :stop_times, calendar: [:calendar_dates])
