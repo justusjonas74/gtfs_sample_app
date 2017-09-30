@@ -4,10 +4,14 @@ class Stop < ApplicationRecord
   scope :no_childs, -> { where(parent_station: "") }
   scope :center_pos, -> {[average(:stop_lat), average(:stop_lon)]}
 
-  def self.search(term)
+  def self.search(term, strict = false)
     if term
-      where('stop_name LIKE ?', "%#{term}%").no_childs
-      #where('stop_name LIKE ?', "%#{term}%")
+      if strict
+        querry = "#{term.downcase}"
+      else
+        querry = "%#{term.downcase}%"
+      end
+      where('lower(stop_name) LIKE ?', querry).no_childs
     else
       all.no_childs
     end

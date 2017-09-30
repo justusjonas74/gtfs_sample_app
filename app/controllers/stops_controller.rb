@@ -1,6 +1,6 @@
 class StopsController < ApplicationController
     helper StopsHelper
-      before_action :get_center_stop, only: [:search, :index]
+    before_action :get_center_stop, only: [:search, :index]
 
     def index
         @stops = Stop.search(params[:term]).paginate(:page => params[:page], :per_page => 30)
@@ -14,8 +14,12 @@ class StopsController < ApplicationController
     end
 
     def find_stop
-      @stop = Stop.where('stop_name LIKE ?', params[:term])
-      if @stop.one?
+      @stop = Stop.search(params[:term], true)
+      case @stop.length
+      when 0
+        flash[:warning] = "Sorry, no stops found with name: <strong>\"#{params[:term]}\".</strong> Please try again"
+        redirect_to root_path
+      when 1
         redirect_to stop_path(@stop.take.id)
       else
         redirect_to stops_path(:term => params[:term])
@@ -35,8 +39,9 @@ class StopsController < ApplicationController
 
     def search
 
-
     end
+
+
 
     def stop_params
       params.require(:stop).permit(:term)

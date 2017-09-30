@@ -13,10 +13,10 @@
 	<div class="centered">
 		<%= form_tag(find_stop_path, method: :post, class: 'form-inline', id: 'search-form') do %>
 				<div class="input-group">
-				<div class="input-group-addon">
+			 	 <%= search_field_tag :term, params[:term], placeholder: "Search for stops...", data: { autocomplete_source: stops_list_path}, class: 'form-control form-control-lg', id: 'search_stop_term' %>
+			 	 	<div class="input-group-addon">
 					<%= material_icon.search %>
 				</div>
-			 	 <%= search_field_tag :term, params[:term], data: { autocomplete_source: stops_list_path}, class: 'form-control form-control-lg', id: 'search_stop_term' %>
 			 	 </div>
 			  <%#= submit_tag 'Search', name: nil, class: 'btn btn-primary' %>
 		<% end %>
