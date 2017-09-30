@@ -1,24 +1,30 @@
-# README
+# GTFS Sample App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Ruby on Rails based sample application to show departures from [GTFS](https://developers.google.com/transit/gtfs/) data.  
 
-Things you may want to cover:
+## Install
+```
+git clone https://github.com/justusjonas74/gtfs_sample_app.git
+bundle install
+```
 
-* Ruby version
+## Configuration
 
-* System dependencies
+Copy `secrets.yml.example` and `database.yml.example` to native .yml files and add your credentials.
 
-* Configuration
+__Database adapters:__  Due to GTFS specifiation of timepoints > 23:59:59 the Postgres data type _interval_ is used for departure times. So currently only Postgres is supported. Feel free to send a pull request. 
 
-* Database creation
+## Import Data
+```
+rails gtfs:import["path/to/gtfs.zip"]
+# or 
+rails gtfs:import["example.com/path/to/gtfs.zip"]
+```
 
-* Database initialization
+## Usage
+```
+rails s
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Contributing
+Feel free to contribute. 
