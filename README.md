@@ -2,6 +2,10 @@
 
 A Ruby on Rails based sample application to show departures from [GTFS](https://developers.google.com/transit/gtfs/) data.  
 
+## Screenshots
+![Screenshot 1](/docs/img/screen.png1?raw=true)
+![Screenshot 2](/docs/img/screen.png2?raw=true)
+
 ## Install
 ```
 git clone https://github.com/justusjonas74/gtfs_sample_app.git
