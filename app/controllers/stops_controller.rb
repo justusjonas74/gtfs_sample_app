@@ -17,7 +17,7 @@ class StopsController < ApplicationController
       @stop = Stop.search(params[:term], true)
       case @stop.length
       when 0
-        flash[:warning] = "Sorry, no stops found with name: <strong>\"#{params[:term]}\".</strong> Please try again"
+        flash[:warning] = "#{helpers.material_icon.warning} Sorry, no stops found with name: <strong>\"#{params[:term]}\".</strong> Please try again"
         redirect_to root_path
       when 1
         redirect_to stop_path(@stop.take.id)
