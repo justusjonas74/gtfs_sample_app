@@ -25,7 +25,7 @@ set :nginx_use_ssl, true
 set :nginx_ssl_certificate, 'cert.pem'
 # SSL certificate file path
 # default value: "/etc/ssl/certs"
-set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/app.francisdoege.com"
+set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/app.francisdoege.com/"
 
 # Name of SSL certificate private key
 # default value: "#{application}.key"
@@ -33,7 +33,7 @@ set :nginx_ssl_certificate_key, 'privkey.pem'
 
 # SSL certificate private key path
 # default value: "/etc/ssl/private"
-set :nginx_ssl_certificate_key_path, "/etc/letsencrypt/live/app.francisdoege.com"
+set :nginx_ssl_certificate_key_path, "/etc/letsencrypt/live/app.francisdoege.com/"
 
 
 namespace :deploy do
