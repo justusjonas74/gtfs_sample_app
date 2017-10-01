@@ -21,19 +21,19 @@ set :config_files, %w{config/database.yml config/secrets.yml}
 set :puma_conf, "#{shared_path}/config/puma.rb"
 
 set :nginx_domains, "app.francisdoege.com www.app.francisdoege.com"
-set :nginx_use_ssl, false
-set :nginx_ssl_certificate, 'app.francisdoege.crt'
+set :nginx_use_ssl, true
+set :nginx_ssl_certificate, 'cert.pem'
 # SSL certificate file path
 # default value: "/etc/ssl/certs"
-#set :nginx_ssl_certificate_path, "#{shared_path}/ssl/certs"
+set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/app.francisdoege.com"
 
 # Name of SSL certificate private key
 # default value: "#{application}.key"
-set :nginx_ssl_certificate_key, 'app.francisdoege.key'
+set :nginx_ssl_certificate_key, 'privkey.pem'
 
 # SSL certificate private key path
 # default value: "/etc/ssl/private"
-#set :nginx_ssl_certificate_key_path, "#{shared_path}/ssl/private"
+set :nginx_ssl_certificate_key_path, "/etc/letsencrypt/live/app.francisdoege.com"
 
 
 namespace :deploy do
