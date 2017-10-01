@@ -22,7 +22,7 @@ set :puma_conf, "#{shared_path}/config/puma.rb"
 
 set :nginx_domains, "app.francisdoege.com www.app.francisdoege.com"
 set :nginx_use_ssl, true
-set :nginx_ssl_certificate, 'cert.pem'
+set :nginx_ssl_certificate, 'fullchain.pem'
 # SSL certificate file path
 # default value: "/etc/ssl/certs"
 set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/app.francisdoege.com/"
