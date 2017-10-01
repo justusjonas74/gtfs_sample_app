@@ -26,7 +26,7 @@ set :nginx_ssl_certificate, 'fullchain.pem'
 # SSL certificate file path
 # default value: "/etc/ssl/certs"
 set :nginx_ssl_certificate_path, "/etc/letsencrypt/live/app.francisdoege.com/"
-
+set :nginx_server_name, "app.francisdoege.com"
 # Name of SSL certificate private key
 # default value: "#{application}.key"
 set :nginx_ssl_certificate_key, 'privkey.pem'
