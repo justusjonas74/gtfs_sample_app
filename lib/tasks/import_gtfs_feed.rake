@@ -2,92 +2,86 @@ namespace :gtfs do
     desc "I am short, but comprehensive description for my cool task"
     task :import, [:file_name] => :environment do |t, args|
       puts "Environment Loaded."
-      source = GTFS::Source.build(args.file_name)
+      source = GTFS::Source.build(args.file_name, { encoding: "BOM|UTF-8"})
       #binding.pry
       puts "Source Loaded."
 
 
 
-    # import_gtfs_source(source, :agency, {
-    #   :agency_id => :id,
-    #   :agency_name => :name,
-    #   :agency_url => :url,
-    #   :agency_timezone => :timezone,
-    #   :agency_lang => :lang,
-    #   :agency_phone => :phone,
-    #   :agency_fare_url => :fare_url,
-    #   #:agency_email => :email BUG: Attribute not available in 'gtfs' gem
-    # })
-
-    # import_gtfs_source(source, :stop, {
-    #   :stop_id => :id,
-    #   :stop_code => :code,
-    #   :stop_name => :name,
-    #   :stop_desc => :desc,
-    #   :stop_lat => :lat,
-    #   :stop_lon => :lon,
-    #   :stop_url => :url,
-    #   :location_type => :location_type,
-    #   :parent_station => :parent_station,
-    #   :stop_timezone => :timezone,
-    #   :wheelchair_boarding => :wheelchair_boarding,
-    #   :zone_id => :zone_id
-    # })
-
-    # import_gtfs_source(source, :route, {
-    #   :route_id => :id,
-    #   :route_short_name => :short_name,
-    #   :route_long_name => :long_name,
-    #   :route_desc => :desc,
-    #   :route_type => :type,
-    #   :route_url => :url,
-    #   :route_color => :color,
-    #   :route_text_color => :text_color
-    # }, {
-    #   :agency_id => :agency_id
-    # })
-
-    # import_gtfs_source(source, :calendar,{
-    #   :calendar_id => :service_id,
-    #   :monday => nil,
-    #   :tuesday => nil,
-    #   :wednesday => nil,
-    #   :thursday => nil,
-    #   :friday => nil,
-    #   :saturday => nil,
-    #   :sunday => nil,
-    #   :start_date => nil,
-    #   :end_date => nil
-    # })
-
-    # import_gtfs_source(source, :calendar_date, {
-    #   #:service_id_ref => :service_id,
-    #   :date => nil,
-    #   :exception_type => nil
-    # },{
-    #   :calendar_id => :calendar_id
-    # })
-
-    # import_gtfs_source(source, :trip, {
-    #   :trip_id => :id,
-    #   :trip_headsign => :headsign,
-    #   :trip_short_name => :short_name,
-    #   :block_id => :block_id,
-    #   :shape_id => :shape_id,
-    #   :direction_id => :direction_id,
-    #   :wheelchair_accessible => :wheelchair_accessible
-    #   #:bikes_allowed #:BUG!
-    # }, {
-    #   :route_id => :route_id,
-    #   :calendar_id => :calendar_id,
-    # })
-
-    # import_gtfs_source(source, :transfer, {
-    #   :from_stop_id => :from_stop_id,
-    #   :to_stop_id => :to_stop_id,
-    #   :min_transfer_time => :min_transfer_time,
-    #   :transfer_type => :type
-    # })
+     import_gtfs_source(source, :agency, {
+       :agency_id => :id,
+       :agency_name => :name,
+       :agency_url => :url,
+       :agency_timezone => :timezone,
+       :agency_lang => :lang,
+       :agency_phone => :phone,
+       :agency_fare_url => :fare_url,
+       #:agency_email => :email BUG: Attribute not available in 'gtfs' gem
+     })
+     import_gtfs_source(source, :stop, {
+       :stop_id => :id,
+       :stop_code => :code,
+       :stop_name => :name,
+       :stop_desc => :desc,
+       :stop_lat => :lat,
+       :stop_lon => :lon,
+       :stop_url => :url,
+       :location_type => :location_type,
+       :parent_station => :parent_station,
+       :stop_timezone => :timezone,
+       :wheelchair_boarding => :wheelchair_boarding,
+       :zone_id => :zone_id
+     })
+     import_gtfs_source(source, :route, {
+       :route_id => :id,
+       :route_short_name => :short_name,
+       :route_long_name => :long_name,
+       :route_desc => :desc,
+       :route_type => :type,
+       :route_url => :url,
+       :route_color => :color,
+       :route_text_color => :text_color
+     }, {
+       :agency_id => :agency_id
+     })
+     import_gtfs_source(source, :calendar,{
+       :calendar_id => :service_id,
+       :monday => nil,
+       :tuesday => nil,
+       :wednesday => nil,
+       :thursday => nil,
+       :friday => nil,
+       :saturday => nil,
+       :sunday => nil,
+       :start_date => nil,
+       :end_date => nil
+     })
+     import_gtfs_source(source, :calendar_date, {
+       #:service_id_ref => :service_id,
+       :date => nil,
+       :exception_type => nil
+     },{
+       :calendar_id => :calendar_id
+     })
+     import_gtfs_source(source, :trip, {
+       :trip_id => :id,
+       :trip_headsign => :headsign,
+       :trip_short_name => :short_name,
+       :block_id => :block_id,
+       :shape_id => :shape_id,
+       :direction_id => :direction_id,
+       :wheelchair_accessible => :wheelchair_accessible
+       #:bikes_allowed #:BUG!
+     }, {
+       :route_id => :route_id,
+       :calendar_id => :calendar_id,
+     })
+     import_gtfs_source(source, :transfer, {
+       :from_stop_id => :from_stop_id,
+       :to_stop_id => :to_stop_id,
+       :min_transfer_time => :min_transfer_time,
+       :transfer_type => :type
+     })
 
     import_gtfs_source(source, :stop_time, {
         :arrival_time => nil,
